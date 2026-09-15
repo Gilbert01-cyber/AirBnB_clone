@@ -125,7 +125,16 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 4:
             print("** value missing **")
             return
-        setattr(obj, args[2], args[3])
+        attr_name = args[2]
+        attr_value = args[3]
+        try:
+            attr_value = int(attr_value)
+        except ValueError:
+            try:
+                attr_value = float(attr_value)
+            except ValueError:
+                pass
+        setattr(obj, attr_name, attr_value)
         obj.save()
 
 
